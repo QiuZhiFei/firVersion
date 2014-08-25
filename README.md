@@ -1,9 +1,13 @@
 firVersion
 ==========
 
-fir 检测版本，并更新提示
+效果 
+-----------
 
+fir 检测版本，并更新提示
 ![](http://zhifei.qiniudn.com/fir_1.png)
+
+
 
 需要修改的文件
 ------------
@@ -20,5 +24,43 @@ fir 检测版本，并更新提示
 
 // app 的 identifier
 #define ZFFirIdentifier @"com.nuandao.nuandao.inhouse"
+
+```
+
+使用
+------------
+
+```
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    
+    // 检查版本
+    [FirServer checkoutVersionCompletionHandler:^(BOOL isNew, NSString *changelog, NSString *name) {
+        
+        if (isNew) {
+            
+            UIAlertView * alert = [[UIAlertView alloc]
+                                   initWithTitle:[name stringByAppendingString:@"更新"]
+                                   message:changelog
+                                   delegate:self
+                                   cancelButtonTitle:@"取消"
+                                   otherButtonTitles:@"下载", nil];
+            [alert show];
+            
+        }
+    }];
+}
+
+
+#pragma mark - alert delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // 下载更新
+    if (buttonIndex == 1) {
+        
+        [FirServer toFirLoad];
+    }
+}
 
 ```
