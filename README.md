@@ -1,10 +1,13 @@
 firVersion
 ==========
 
+在使用 fir 的过程中，实现 app 的检测版本号，会提醒 测试人员 更新
+
 效果 
 -----------
 
 fir 检测版本，并更新提示
+
 ![](http://zhifei.qiniudn.com/fir_1.png)
 
 
