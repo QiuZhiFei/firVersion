@@ -26,25 +26,28 @@
                                
                                dispatch_async(dispatch_get_main_queue(), ^{
                                    
-                                   NSDictionary * status = [NSJSONSerialization JSONObjectWithData:data
-                                                                                           options:kNilOptions
-                                                                                             error:nil];
-                                   
-                                   // 服务端 version 与 本地 version
-                                   NSString * version = [status objectForKey:@"versionShort"];
-                                   NSString * localVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-                                   
-                                   BOOL isNew = NO;
-                                   if ([localVersion compare:version options:NSNumericSearch] == NSOrderedAscending) {
+                                   if (data) {
                                        
-                                       isNew = YES;
-                                   }
-                                   
-                                   if (block_action) {
+                                       NSDictionary * status = [NSJSONSerialization JSONObjectWithData:data
+                                                                                               options:kNilOptions
+                                                                                                 error:nil];
                                        
-                                       block_action(isNew, [status objectForKey:@"changelog"], [status objectForKey:@"name"]);
+                                       // 服务端 version 与 本地 version
+                                       NSString * version = [status objectForKey:@"versionShort"];
+                                       NSString * localVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+                                       
+                                       BOOL isNew = NO;
+                                       if ([localVersion compare:version options:NSNumericSearch] == NSOrderedAscending) {
+                                           
+                                           isNew = YES;
+                                       }
+                                       
+                                       if (block_action) {
+                                           
+                                           block_action(isNew, [status objectForKey:@"changelog"], [status objectForKey:@"name"]);
+                                       }
+
                                    }
-                                   
                                });
                                
                            }];
