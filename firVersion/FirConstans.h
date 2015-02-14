@@ -3,7 +3,7 @@
 //  Test
 //
 //  Created by mac on 8/22/14.
-//  Copyright (c) 2014 (zhifei - qiuzhifei521@gmail.com). All rights reserved.
+//  Copyright (c) 2014 (zhifei.qiu - qiuzhifei521@gmail.com). All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
